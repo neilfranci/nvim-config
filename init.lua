@@ -1,16 +1,46 @@
-
--- Set <space> as the leader key
--- See `:help mapleader`
---  NOTE: Must happen before plugins are required (otherwise wrong leader will be used)
-vim.g.mapleader = ' '
-vim.g.maplocalleader = ' '
-
--- [[ Install `lazy.nvim` plugin manager ]]
-require('lazy-bootstrap')
-
--- setup plugins
-require('lazy').setup('plugins')
-
-require("options")
-
-require("utils")
+require "launch"
+require "options"
+require "keymaps"
+require "user.autocmds"
+--require("utils")
+spec "user.extras.startup-time"
+spec "user.extras.alpha"
+spec "user.colorscheme"
+-- spec "user.transparent"
+spec "user.devicons"
+spec "user.treesitter"
+spec "user.lsp-setup"
+spec "user.cmp"
+spec "user.schemestore"
+spec "user.telescope"
+spec "user.nvim-tree"
+spec "user.which-key"
+spec "user.comment"
+-- TODO: need to configure this
+spec "user.lualine"
+spec "user.harpoon"
+-- TODO: need to configure this
+spec "user.indent-line"
+spec "user.gitsigns"
+spec "user.extras.colorizer"
+spec "user.extras.dressing"
+spec "user.extras.fidget"
+-- spec "user.extras.mini-notify" -- like fidget but with top popup
+spec "user.extras.auto-session"
+spec "user.extras.codeium"
+spec "user.extras.tabby"
+spec "user.extras.illuminate"
+spec "user.extras.oil"
+spec "user.extras.flash"
+-- TODO: need to configure this
+spec "user.extras.ufo"
+spec "user.extras.eyeliner"
+spec "user.extras.neotab"
+spec "user.extras.bqf"
+spec "user.extras.modicator"
+spec "user.extras.navbuddy"
+spec "user.extras.trouble"
+-- weird scrolling, it should stop if we press opposite direction,
+-- not keep scrolling lol
+-- spec "user.extras.neoscroll" 
+require "lazy-setup"

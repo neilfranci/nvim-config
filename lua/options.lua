@@ -19,30 +19,30 @@ local options = {
   smartcase = true,
   ignorecase = true,
 
-  fileencoding = "utf-8", -- the encoding written to a file
+  -- fileencoding = "utf-8", -- the encoding written to a file
   splitbelow = true, -- force all horizontal splits to go below current window
   splitright = true, -- force all vertical splits to go to the right of current window
   signcolumn = "yes", -- always show the sign column, otherwise it would shift the text each time
   wrap = false, -- display lines as one long line
-  scrolloff = 8, -- minimal number of columns to scroll horizontally.
+  scrolloff = 0, -- minimal number of columns to scroll horizontally.
   sidescrolloff = 8, -- minimal number of screen columns
   lazyredraw = false, -- Won't be redrawn while executing macros, register and other commands.
-  ruler = false,
-  termguicolors = true,
+  -- ruler = false,
   -- Set completeopt to have a better completion experience,
-  completeopt = 'menuone,noselect'
-}
-
-local global = {
-  mapleader = " ", -- Set mapleader to space
-  loaded_netrw = 1,
-  loaded_netrwPlugin = 1
+  completeopt = 'menuone,noselect',
+  swapfile = false,
+  backup = false,
+  cmdheight = 1,
+  showtabline = 1, -- always show tabs
+  termguicolors = true,
+  -- timeoutlen = 1000,
+  undofile = true,
+  updatetime = 100, -- faster completion
+  writebackup = false,
+  laststatus = 3,
 }
 
 for name, value in pairs(options) do
   vim.opt[name] = value
 end
 
-for name, value in pairs(global) do
-  vim.g[name] = value
-end
