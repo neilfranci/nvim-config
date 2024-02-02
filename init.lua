@@ -40,6 +40,7 @@ spec "user.extras.bqf"
 spec "user.extras.modicator"
 spec "user.extras.navbuddy"
 spec "user.extras.trouble"
+spec "user.extras.lazygit"
 -- weird scrolling, it should stop if we press opposite direction,
 -- not keep scrolling lol
 -- spec "user.extras.neoscroll" 
