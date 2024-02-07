@@ -40,10 +40,10 @@ return {
 		LineAdded = " ",
 		LineModified = " ",
 		LineRemoved = " ",
-		FileDeleted = " ",
+		FileDeleted = " ", -- 
 		FileIgnored = "◌",
 		FileRenamed = " ",
-		FileStaged = "S",
+		FileStaged = "✓",
 		FileUnmerged = "",
 		FileUnstaged = "",
 		FileUntracked = "U",
@@ -94,8 +94,8 @@ return {
 		Ellipsis = "",
 		EmptyFolder = " ",
 		EmptyFolderOpen = " ",
-		File = " ",
-		FileSymlink = "",
+		File = "󰈔", -- 󰈚  󰈔  
+		FileSymlink = " ",
 		Files = " ",
 		FindFile = "󰈞",
 		FindText = "󰊄",

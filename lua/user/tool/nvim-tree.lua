@@ -10,12 +10,17 @@ local M = {
 		-- Auto focus already opened files
 		on_attach = function(bufnr)
 			local function opts(desc)
-				return { desc = "nvim-tree: " .. desc, buffer = bufnr, noremap = true, silent = false, nowait = true }
+				return {
+					desc = "nvim-tree: " .. desc,
+					buffer = bufnr,
+					noremap = true,
+					silent = false,
+					nowait = true,
+				}
 			end
 			local ok, api = pcall(require, "nvim-tree.api")
 			assert(ok, "api module is not found")
 			vim.keymap.set("n", "<CR>", api.node.open.tab_drop, opts("Tab drop"))
-			-- { key = "t", action = "swap_then_open_tab", action_cb = swap_then_open_tab },
 		end,
 	},
 }
@@ -42,10 +47,8 @@ function M.config()
 		end
 	end
 
-	local wk = require("which-key")
-	wk.register({
-		["<leader>e"] = { nvimTreeFocusOrToggle, "Explorer" },
-	})
+	vim.keymap.set("n", "<leader>e", nvimTreeFocusOrToggle, { desc = "Explorer" })
+
 	-- Auto open when file is created
 	api.events.subscribe(api.events.Event.FileCreated, function(file)
 		vim.cmd("edit " .. file.fname)
@@ -64,10 +67,8 @@ function M.config()
 		view = {
 			relativenumber = true,
 			cursorline = true,
-			-- adaptive_size = false,
 			side = "left",
-			width = 30,
-			-- preserve_window_proportions = true
+			width = 36,
 		},
 		git = {
 			enable = true,
@@ -102,25 +103,25 @@ function M.config()
 					git = true,
 				},
 				glyphs = {
-					default = "󰈚",
-					symlink = "",
+					default = icons.ui.File,
+					symlink = icons.ui.FileSymlink,
 					folder = {
-						default = "",
+						default = icons.ui.Folder,
 						empty = icons.ui.EmptyFolder,
 						empty_open = icons.ui.EmptyFolderOpen,
 						open = icons.ui.FolderOpen,
-						symlink = "",
-						symlink_open = "",
+						symlink = icons.ui.FolderSymlink,
+						symlink_open = icons.ui.FolderSymlink,
 						arrow_closed = icons.ui.ChevronRight,
 						arrow_open = icons.ui.ChevronDown,
 					},
 					git = {
 						unstaged = icons.git.FileUnstaged,
-						staged = "✓",
-						unmerged = "",
-						renamed = "➜",
+						staged = icons.git.FileStaged,
+						unmerged = icons.git.FileUnmerged,
+						renamed = icons.git.FileRenamed,
 						untracked = icons.git.FileUntracked,
-						deleted = "",
+						deleted = icons.git.FileDeleted,
 						ignored = icons.git.FileIgnored,
 					},
 				},
