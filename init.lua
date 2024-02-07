@@ -1,47 +1,49 @@
-require "launch"
-require "options"
-require "keymaps"
-require "user.autocmds"
---require("utils")
-spec "user.extras.startup-time"
-spec "user.extras.alpha"
-spec "user.colorscheme"
+require("settings")
+require("keymaps")
+require("launch")
+require("autocmds")
+-- spec("user.extras.alpha")
+spec("user.colorscheme.catppuccin")
 -- spec "user.transparent"
-spec "user.devicons"
-spec "user.treesitter"
-spec "user.lsp-setup"
-spec "user.cmp"
-spec "user.schemestore"
-spec "user.telescope"
-spec "user.nvim-tree"
-spec "user.which-key"
-spec "user.comment"
+spec("user.ui.devicons")
+spec("user.code.treesitter")
+spec("user.code.lsp-setup")
+spec("user.code.cmp")
+spec("user.code.schemestore")
+spec("user.tool.telescope")
+spec("user.tool.nvim-tree")
+spec("user.tool.which-key")
+spec("user.code.conform")
+spec("user.code.comment")
 -- TODO: need to configure this
-spec "user.lualine"
-spec "user.harpoon"
+spec("user.ui.lualine")
+spec("user.tool.harpoon")
 -- TODO: need to configure this
-spec "user.indent-line"
-spec "user.gitsigns"
-spec "user.extras.colorizer"
-spec "user.extras.dressing"
-spec "user.extras.fidget"
+-- spec("user.indent-line")
+spec("user.git.gitsigns")
+spec("user.ui.colorizer")
+spec("user.ui.dressing")
+spec("user.ui.fidget")
 -- spec "user.extras.mini-notify" -- like fidget but with top popup
-spec "user.extras.auto-session"
-spec "user.extras.codeium"
-spec "user.extras.tabby"
-spec "user.extras.illuminate"
-spec "user.extras.oil"
-spec "user.extras.flash"
+spec("user.extras.auto-session")
+spec("user.code.codeium")
+spec("user.tool.tabby")
+-- spec("user.extras.illuminate") -- highlighting other uses of the word under the cursor
+-- spec "user.extras.oil"
+spec("user.extras.flash")
 -- TODO: need to configure this
-spec "user.extras.ufo"
-spec "user.extras.eyeliner"
-spec "user.extras.neotab"
-spec "user.extras.bqf"
-spec "user.extras.modicator"
-spec "user.extras.navbuddy"
-spec "user.extras.trouble"
-spec "user.extras.lazygit"
+spec("user.ui.ufo")
+spec("user.ui.statuscol")
+-- spec "user.extras.eyeliner" -- same as flash but 1 line
+-- spec("user.extras.neotab") -- Tabout #TODO fix this
+spec("user.ui.bqf") -- Better quickfix window
+spec("user.ui.modicator")
+-- spec("user.extras.navbuddy") -- lsp navigation
+spec("user.code.trouble")
+spec("user.git.lazygit")
+spec("user.tool.toggleterm")
+-- spec "user.extras.twilight"
 -- weird scrolling, it should stop if we press opposite direction,
 -- not keep scrolling lol
--- spec "user.extras.neoscroll" 
-require "lazy-setup"
+-- spec "user.extras.neoscroll"
+require("lazy-setup")
