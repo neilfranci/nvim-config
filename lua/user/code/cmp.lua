@@ -3,6 +3,7 @@ local M = {
 	event = { "InsertEnter" },
 	dependencies = {
 		"hrsh7th/cmp-nvim-lsp",
+		"hrsh7th/cmp-nvim-lsp-signature-help",
 		"hrsh7th/cmp-buffer", -- source for text in buffer
 		"hrsh7th/cmp-path", -- source for file system paths
 		"saadparwaiz1/cmp_luasnip", -- for autocompletion
@@ -10,7 +11,7 @@ local M = {
 			"L3MON4D3/LuaSnip", -- snippet engine
 			dependencies = "rafamadriz/friendly-snippets",
 		},
-		"onsails/lspkind.nvim", -- vs-code like pictograms
+		-- "onsails/lspkind.nvim", -- vs-code like pictograms
 	},
 }
 
@@ -22,7 +23,7 @@ end
 function M.config()
 	local cmp = require("cmp")
 	local luasnip = require("luasnip")
-	local lspkind = require("lspkind")
+	-- local lspkind = require("lspkind")
 
 	-- loads vscode style snippets from installed plugins (e.g: friendly-snippets)
 	require("luasnip.loaders.from_vscode").lazy_load()
@@ -87,14 +88,14 @@ function M.config()
 			["<Tab>"] = cmp.mapping(function(fallback)
 				if cmp.visible() then
 					cmp.select_next_item()
-				elseif luasnip.expandable() then
-					luasnip.expand()
+				-- elseif luasnip.expandable() then
+				-- 	luasnip.expand()
 				elseif luasnip.expand_or_jumpable() then
 					luasnip.expand_or_jump()
-				elseif M.has_words_before() then
-					cmp.complete()
-				elseif check_backspace() then
-					fallback()
+				-- elseif M.has_words_before() then
+				-- 	cmp.complete()
+				-- elseif check_backspace() then
+				-- 	fallback()
 				else
 					fallback()
 				end
@@ -118,25 +119,15 @@ function M.config()
 		formatting = {
 			fields = { "abbr", "kind", "menu" },
 			expandable_indicator = false,
-			-- format = require('lspkind').cmp_format {
-			--   mode = 'symbol',
-			--   maxwidth = 40,
-			--   ellipsis_char = '...',
-			--   symbol_map = {
-			--     TypeParameter = 'T',
-			--     Codeium = '󰇈',
-			--   },
-			-- },
-
 			format = function(entry, vim_item)
 				-- Kind icons
 				vim_item.kind = kind_icons[vim_item.kind]
 				-- Source
 				vim_item.menu = ({
 					nvim_lsp = "[LSP]",
-					nvim_lua = "[NVIM-LUA]",
-					luasnip = "[Snippet]",
-					buffer = "",
+					nvim_lua = "[LUA]",
+					luasnip = "[SNIP]",
+					buffer = "[BUF]",
 					-- path = "[PATH]",
 					codeium = "[AI]",
 				})[entry.source.name]
@@ -148,13 +139,10 @@ function M.config()
 			{ name = "codeium" },
 			{ name = "nvim_lsp" },
 			{ name = "luasnip" }, -- For luasnip users.
-			{ name = "buffer" },
+			{ name = "buffer", keyword_length = 2, max_item_count = 5 }, -- keep spam to a mininum
 			{ name = "path" },
+			{ name = "nvim_lsp_signature_help" },
 		}),
-		-- confirm_opts = {
-		--   behavior = cmp.ConfirmBehavior.Replace,
-		--   select = false,
-		-- },
 		window = {
 			completion = {
 				border = "rounded",
@@ -185,9 +173,10 @@ function M.config()
 			max_view_entries = 200,
 		},
 		experimental = {
-			ghost_text = {
-				hl_group = "LspCodeLens",
-			},
+			ghost_text = true,
+			-- {
+			-- 	hl_group = "LspCodeLens",
+			-- },
 		},
 	})
 end

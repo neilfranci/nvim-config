@@ -12,7 +12,7 @@ local M = {
 		-- Improve Other LSP Functionalities
 		{
 			"nvimdev/lspsaga.nvim",
-			opts = require("user.configs.lspsaga"),
+			opts = require("user.code.lspsaga"),
 		},
 		{
 			"folke/neodev.nvim",
@@ -37,7 +37,7 @@ local function lsp_keymaps(bufnr)
 	keymap("n", "gi", "<cmd>Telescope lsp_implementations<cr>", buf_opts)
 end
 
-M.on_attach = function(_, bufnr)
+local on_attach = function(_, bufnr)
 	lsp_keymaps(bufnr)
 end
 
@@ -48,23 +48,14 @@ function M.config()
 
 	local capabilities = require("cmp_nvim_lsp").default_capabilities()
 
-	local wk = require("which-key")
-	wk.register({
-		["<leader>la"] = { "<cmd>lua vim.lsp.buf.code_action()<cr>", "Code Action" },
-		["<leader>li"] = { "<cmd>LspInfo<cr>", "Info" },
-		["<leader>lj"] = { "<cmd>lua vim.diagnostic.goto_next()<cr>", "Next Diagnostic" },
-		["<leader>lk"] = { "<cmd>lua vim.diagnostic.goto_prev()<cr>", "Prev Diagnostic" },
-		["<leader>ll"] = { "<cmd>lua vim.lsp.codelens.run()<cr>", "CodeLens Action" },
-		["<leader>lq"] = { "<cmd>lua vim.diagnostic.setloclist()<cr>", "Quickfix" },
-		["<leader>lr"] = { "<cmd>lua vim.lsp.buf.rename()<cr>", "Rename" },
-	})
-
-	wk.register({
-		["<leader>la"] = {
-			name = "LSP",
-			a = { "<cmd>lua vim.lsp.buf.code_action()<cr>", "Code Action", mode = "v" },
-		},
-	})
+	keymap("n", "<leader>li", "<cmd>LspInfo<cr>", { desc = "LSP Info" })
+	keymap("n", "<leader>la", "<cmd>lua vim.lsp.buf.code_action()<cr>", { desc = "Code Action" })
+	keymap("n", "<leader>lj", "<cmd>lua vim.diagnostic.goto_next()<cr>", { desc = "Next Diagnostic" })
+	keymap("n", "<leader>lk", "<cmd>lua vim.diagnostic.goto_prev()<cr>", { desc = "Prev Diagnostic" })
+	keymap("n", "<leader>ll", "<cmd>lua vim.lsp.codelens.run()<cr>", { desc = "CodeLens Action" })
+	keymap("n", "<leader>lq", "<cmd>lua vim.diagnostic.setloclist()<cr>", { desc = "Quickfix" })
+	-- keymap("n", "<leader>lr", "<cmd>lua vim.lsp.buf.rename()<cr>", { desc = "Rename" })
+	keymap("n", "<leader>lr", "<cmd>lua vim.cmd.LspRestart()<cr>", { desc = "Restart LSP" })
 
 	mason.setup({
 		ui = {
@@ -89,7 +80,7 @@ function M.config()
 			-- Web Development
 			"cssls",
 			"html",
-			-- "tsserver",
+			"tsserver",
 			"volar",
 			-- "tailwindcss",
 			-- "emmet_language_server",
@@ -130,9 +121,11 @@ function M.config()
 		vim.fn.sign_define(sign.name, { texthl = sign.name, text = sign.text, numhl = sign.name })
 	end
 
-	vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = "rounded" })
-	vim.lsp.handlers["textDocument/signatureHelp"] =
-		vim.lsp.with(vim.lsp.handlers.signature_help, { border = "rounded" })
+	local handlers = {
+		["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = "rounded" }),
+		["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, { border = "rounded" }),
+	}
+
 	require("lspconfig.ui.windows").default_options.border = "rounded"
 
 	mason_lspconfig.setup_handlers({
@@ -140,7 +133,8 @@ function M.config()
 		function(server_name)
 			local opts = {
 				capabilities = capabilities,
-				on_attach = M.on_attach,
+				on_attach = on_attach,
+				handlers = handlers,
 			}
 
 			local require_ok, server = pcall(require, "user.lspsettings." .. server_name)
