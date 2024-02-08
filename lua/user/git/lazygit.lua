@@ -1,4 +1,4 @@
-local M = {
+return {
 	"kdheepak/lazygit.nvim",
 	-- optional for floating window border decoration
 	dependencies = {
@@ -12,5 +12,3 @@ local M = {
 		},
 	},
 }
-
-return M
