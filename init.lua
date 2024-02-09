@@ -14,6 +14,7 @@ spec("user.tool.telescope")
 spec("user.tool.nvim-tree")
 spec("user.tool.which-key")
 spec("user.code.conform")
+-- spec("user.code.nvim-lint")
 spec("user.code.comment")
 -- TODO: need to configure this
 spec("user.ui.lualine")
@@ -42,6 +43,7 @@ spec("user.ui.modicator")
 spec("user.code.trouble")
 spec("user.git.lazygit")
 spec("user.tool.toggleterm")
+spec("user.tool.spectre")
 -- spec "user.extras.twilight"
 -- weird scrolling, it should stop if we press opposite direction,
 -- not keep scrolling lol

@@ -80,7 +80,7 @@ function M.config()
 			-- Web Development
 			"cssls",
 			"html",
-			"tsserver",
+			-- "tsserver",
 			"volar",
 			-- "tailwindcss",
 			-- "emmet_language_server",
@@ -137,7 +137,7 @@ function M.config()
 				handlers = handlers,
 			}
 
-			local require_ok, server = pcall(require, "user.lspsettings." .. server_name)
+			local require_ok, server = pcall(require, "user.code.language_config." .. server_name)
 			if require_ok then
 				opts = vim.tbl_deep_extend("force", server, opts)
 			end

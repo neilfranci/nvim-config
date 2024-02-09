@@ -36,7 +36,7 @@ function M.config()
 					color = { fg = "#ff9e64" },
 				},
 				{ "filename" },
-				-- { "encoding" },
+				{ "encoding" },
 				{ "fileformat" },
 				{ "filetype" },
 			},

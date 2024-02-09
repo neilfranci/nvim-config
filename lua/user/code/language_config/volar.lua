@@ -1,11 +1,11 @@
 return {
   filetypes = {'typescript', 'javascript', 'javascriptreact', 'typescriptreact', 'vue', 'json'},
   settings = {
-    init_options = {
-      typescript = {
-        tsdk = vim.fn.stdpath "data" .. "/mason/packages/vue-language-server/node_modules/typescript/lib",
-      },
-    },
+    -- init_options = {
+    --   typescript = {
+    --     tsdk = vim.fn.stdpath "data" .. "/mason/packages/vue-language-server/node_modules/typescript/lib",
+    --   },
+    -- },
     languageFeatures = {
       implementation = true,
       references = true,
